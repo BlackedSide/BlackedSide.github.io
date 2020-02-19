@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单理解"><span class="toc-text">简单理解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、封装"><span class="toc-text">1、封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、继承"><span class="toc-text">2、继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、多态"><span class="toc-text">3、多态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体谈多态的特性"><span class="toc-text">具体谈多态的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、普通类继承"><span class="toc-text">1、普通类继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、抽象类继承"><span class="toc-text">2、抽象类继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、接口实现"><span class="toc-text">3、接口实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类与接口的区别"><span class="toc-text">抽象类与接口的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#深层讲解（参考自参考链接）"><span class="toc-text">深层讲解（参考自参考链接）</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#简单理解"><span class="toc-text">简单理解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、封装"><span class="toc-text">1、封装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、继承"><span class="toc-text">2、继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、多态"><span class="toc-text">3、多态</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体谈多态的特性"><span class="toc-text">具体谈多态的特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、普通类继承"><span class="toc-text">1、普通类继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、抽象类继承"><span class="toc-text">2、抽象类继承</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、接口实现"><span class="toc-text">3、接口实现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#抽象类与接口的区别"><span class="toc-text">抽象类与接口的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#深层讲解"><span class="toc-text">深层讲解</span></a></li></ol></li></ol>
 </div>
     
 </div>
@@ -157,13 +157,13 @@
 <h4 id="1、普通类继承"><a href="#1、普通类继承" class="headerlink" title="1、普通类继承"></a>1、普通类继承</h4><p>导出类不一定需要覆写基类的所有方法，导出类对象中包含了基类的子对象，故通过<code>getWheelNum()</code>方法，可以获得基类中的成员变量<code>wheelNum</code>。</p>
 <h4 id="2、抽象类继承"><a href="#2、抽象类继承" class="headerlink" title="2、抽象类继承"></a>2、抽象类继承</h4><p>抽象类的导出类必须覆写基类的抽象方法，赋予具体实现。</p>
 <h4 id="3、接口实现"><a href="#3、接口实现" class="headerlink" title="3、接口实现"></a>3、接口实现</h4><p>实现了某接口的类必须覆写接口中所有的方法，赋予具体实现。</p>
-<p class="color: red;">所有导出类，都可以通过向上转型的方式，在运行时绑定，从而实现多态性。</p>
-
+<p><strong><em>所有导出类，都可以通过向上转型的方式，在运行时绑定，从而实现多态性。</em></strong></p>
 <h3 id="抽象类与接口的区别"><a href="#抽象类与接口的区别" class="headerlink" title="抽象类与接口的区别"></a>抽象类与接口的区别</h3><ol>
 <li>接口只能定义抽象方法，而抽象类可以定义非抽象方法。</li>
 <li>类只能单继承，而接口可以多实现。</li>
 </ol>
-<h4 id="深层讲解（参考自参考链接）"><a href="#深层讲解（参考自参考链接）" class="headerlink" title="深层讲解（参考自参考链接）"></a>深层讲解（参考自参考链接）</h4><ul>
+<h4 id="深层讲解"><a href="#深层讲解" class="headerlink" title="深层讲解"></a>深层讲解</h4><p>参考链接：<a href="https://blog.csdn.net/aptentity/article/details/68942916" target="_blank" rel="noopener">https://blog.csdn.net/aptentity/article/details/68942916</a></p>
+<ul>
 <li>抽象类<ul>
 <li>对类型进行隐藏，可以构造出一个固定的一组行为的抽象描述，一个行为可以有任意个可能的具体实现方式。这个抽象的描述就是抽象类。（即多态性的体现）</li>
 <li>这一组任意个可能的具体实现表现为所有可能的导出类，模块可以操作一个抽象类，由于模块依赖于一个固定的抽象类，那么它是不允许修改的。同时通过这个抽象类进行派生，拓展此模块的行为功能。</li>
@@ -176,7 +176,8 @@
 </ul>
 </li>
 </ul>
-<p class="color: red;">抽象类强调的是从属关系，接口强调的是功能。</p>
+<p><strong><em>抽象类强调的是从属关系，接口强调的是功能。</em></strong></p>
+
         
         <br />
         <div id="comment-container">

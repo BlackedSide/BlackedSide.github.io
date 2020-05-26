@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="I am a weak SDN postgraduate, however, I love coding.">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+        Ubuntu16环境下部署Cbench测试工具 - BlackSide的博客 | BlackSide&#39;s Blog
+        
+    </title>
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_pl6z7sid89qkt9.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i> I am a weak postgraduate doing SDN, however, I love coding. </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/img/author.jpeg" />
+        </div>
+        <div class="name">
+            <i>BlackSide Fan</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>主页</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>标签</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>存档</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>关于</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>搜索</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实验环境"><span class="toc-text">实验环境</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#搭建步骤"><span class="toc-text">搭建步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-安装Floodlight控制器"><span class="toc-text">一. 安装Floodlight控制器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装jdk8"><span class="toc-text">1. 安装jdk8</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-安装Floodlight控制器"><span class="toc-text">2. 安装Floodlight控制器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-安装OpenFlow"><span class="toc-text">3. 安装OpenFlow</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装Cbench"><span class="toc-text">4. 安装Cbench</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">搜索</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i> I am a weak postgraduate doing SDN, however, I love coding. </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Ubuntu16环境下部署Cbench测试工具
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">发布于：<span>2020-05-26 12:33:36</span></span>
+        
+        <span class="attr">标签：/
+        
+        <a class="tag" href="/tags/#SDN" title="SDN">SDN</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">访问：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
+        <blockquote>
+<p>哦，天啊，SDN实验，永远滴痛。</p>
+</blockquote>
+<p>今天折腾SDN的实验，使用SDN的Controller Benchmark测试工具Cbench来测试SDN控制器的性能。众所周知（也许只我一菜逼知道），由于一些文档的缺乏，加上各种工具版本的更迭导致的各工具之间不兼容问题，SDN的实验环境极其难以部署（吧）。今天在Ubuntu16.04LTS环境下搭建了该测试环境，费了不少功夫，不过也算是完成了。</p>
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><ul>
+<li>操作系统：Ubuntu16.04LTS</li>
+<li>SDN控制器：Floodlight（github master）最新版（<a href="https://github.com/floodlight/floodlight）" target="_blank" rel="noopener">https://github.com/floodlight/floodlight）</a></li>
+<li>测试工具：Cbench（<a href="https://github.com/mininet/oflops）" target="_blank" rel="noopener">https://github.com/mininet/oflops）</a></li>
+<li>OpenFlow：1.0（<a href="https://github.com/mininet/openflow）" target="_blank" rel="noopener">https://github.com/mininet/openflow）</a></li>
+</ul>
+<h2 id="搭建步骤"><a href="#搭建步骤" class="headerlink" title="搭建步骤"></a>搭建步骤</h2><h3 id="一-安装Floodlight控制器"><a href="#一-安装Floodlight控制器" class="headerlink" title="一. 安装Floodlight控制器"></a>一. 安装Floodlight控制器</h3><h4 id="1-安装jdk8"><a href="#1-安装jdk8" class="headerlink" title="1. 安装jdk8"></a>1. 安装jdk8</h4><p>由于最新版Floodlight控制器依赖Java8版本，所以操作系统中需要配置jdk8环境。</p>
+<p>我一开始使用命令行安装的openjdk-1.8，但是导致Floodlight安装过程出现了问题，所以从jdk官网下载了jdk1.8，通过.bashrc配置系统变量，解决了Floodlight安装错误问题。</p>
+<ul>
+<li>从oracle官网下载jdk1.8-linux-x64版<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我下载的版本是 jdk-8u251-linux-x64.tar.gz</span><br></pre></td></tr></table></figure></li>
+<li>解压到/opt/java文件夹中（这里其实可以随意，只要后面配对系统环境变量就行）<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo tar -zxvf jdk-8u251-linux-x64.tar.gz -C /opt/java/</span><br></pre></td></tr></table></figure></li>
+<li>配置环境变量，在<code>~/.bashrc</code>中添加下列两行<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> ~</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> vim .bashrc</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export JAVA_HOME&#x3D;&#x2F;opt&#x2F;java&#x2F;jdk1.8.0_251</span><br><span class="line">export PATH&#x3D;$&#123;JAVA_HOME&#125;&#x2F;bin:$&#123;PATH&#125;</span><br></pre></td></tr></table></figure></li>
+<li>使<code>.bashrc</code>生效<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="2-安装Floodlight控制器"><a href="#2-安装Floodlight控制器" class="headerlink" title="2. 安装Floodlight控制器"></a>2. 安装Floodlight控制器</h4><ul>
+<li>安装依赖<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sudo apt-get install build-essential ant maven python-dev</span></span><br></pre></td></tr></table></figure></li>
+<li>进入<code>~</code>目录</li>
+<li>操作如下<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> git <span class="built_in">clone</span> git://github.com/floodlight/floodlight.git</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> floodlight</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> git submodule init</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> git submodule update</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ant</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo mkdir /var/lib/floodlight</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo chmod 777 /var/lib/floodlight</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="3-安装OpenFlow"><a href="#3-安装OpenFlow" class="headerlink" title="3. 安装OpenFlow"></a>3. 安装OpenFlow</h4><ul>
+<li>进入<code>~</code>目录</li>
+<li>操作如下<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> git <span class="built_in">clone</span> git://github.com/mininet/openflow.git</span></span><br></pre></td></tr></table></figure></li>
+<li>这里得到OpenFlow的目录是你用户目录下的<code>openflow</code>目录，等会需要用到，直接进入该目录输入<code>pwd</code>即可获取完整绝对路径</li>
+</ul>
+<h4 id="4-安装Cbench"><a href="#4-安装Cbench" class="headerlink" title="4. 安装Cbench"></a>4. 安装Cbench</h4><ul>
+<li>安装必要的依赖<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sudo apt-get install autoconf automake libtool libpcap-dev</span></span><br></pre></td></tr></table></figure></li>
+<li>注意这里我没有按照官网上安装<code>libsnmp-dev</code>，因为我安装的时候出错了。用如下方法安装：（aptitude可以帮助你安装需要的依赖，或者帮助你选择降级部分依赖来使得能够正确安装与使用）<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> sudo apt-get install aptitude</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sudo aptitude install libsnmp-dev</span></span><br></pre></td></tr></table></figure></li>
+<li>安装Cbench，在<code>~</code>目录下，这里的<code>/home/funny/openflow</code>是我之前OpenFlow安装的目录<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> git <span class="built_in">clone</span> git://github.com/mininet/oflops.git</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> <span class="built_in">cd</span> oflops/</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> sh boot.sh</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> .configure --with-openflow-src-dir=/home/funny/openflow</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> make</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> make install</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>至此，Cbench就完整的安装完成了。开始做实验吧（哭脸）~</p>
+
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+
+        <div id="lv-container">
+        </div>
+
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+        <li>
+            <a target="_blank" href="http://weibo.com/3055837443">
+                            <span class="fa-stack fa-lg">
+                                  <i class="iconfont icon-weibo"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+        
+        <li>
+            <a target="_blank"  href="https://github.com/BlackedSide">
+                            <span class="fa-stack fa-lg">
+                                <i class="iconfont icon-github"></i>
+                            </span>
+            </a>
+        </li>
+        
+
+        
+
+    </ul>
+    
+    <p>
+        <span>/</span>
+        
+        <span><a href="http://www.fannyuan.xyz" target="_blank" rel="noopener">BlackSide&#39;s Page</a></span>
+        <span>/</span>
+        
+    </p>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>  Theme <a href="https://github.com/aircloud/hexo-theme-aircloud" target="_blank" rel="noopener">AirCloud</a></p>
+</footer>
+
+
+
+
+</body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.json"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+</html>

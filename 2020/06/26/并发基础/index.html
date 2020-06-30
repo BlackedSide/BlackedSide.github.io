@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-进程和线程"><span class="toc-text">1. 进程和线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-线程的启动"><span class="toc-text">2. 线程的启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-停止线程"><span class="toc-text">3. 停止线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Sleep"><span class="toc-text">4. Sleep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Wait-Notify-NotifyAll"><span class="toc-text">5. Wait&#x2F;Notify&#x2F;NotifyAll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Yield"><span class="toc-text">6. Yield</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Join"><span class="toc-text">7. Join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-线程优先级"><span class="toc-text">8. 线程优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-内存可见性"><span class="toc-text">9. 内存可见性</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-进程和线程"><span class="toc-text">1. 进程和线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-线程的启动"><span class="toc-text">2. 线程的启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-停止线程"><span class="toc-text">3. 停止线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Sleep"><span class="toc-text">4. Sleep</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Wait-Notify-NotifyAll"><span class="toc-text">5. Wait&#x2F;Notify&#x2F;NotifyAll</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Yield"><span class="toc-text">6. Yield</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Join"><span class="toc-text">7. Join</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-线程优先级"><span class="toc-text">8. 线程优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-内存可见性"><span class="toc-text">9. 内存可见性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-死锁"><span class="toc-text">10. 死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-守护线程"><span class="toc-text">11. 守护线程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-sychronized关键字"><span class="toc-text">12. sychronized关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#13-ReentrantLock"><span class="toc-text">13. ReentrantLock</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#14-volatile关键字"><span class="toc-text">14. volatile关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#15-线程池"><span class="toc-text">15. 线程池</span></a></li></ol>
 </div>
     
 </div>
@@ -145,7 +145,10 @@
 </span>
     </div>
     <div class="post-content ">
-        <h3 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1. 进程和线程"></a>1. 进程和线程</h3><ul>
+        <blockquote>
+<p>参考资料：<a href="https://blog.csdn.net/cheidou123/article/details/90712178" target="_blank" rel="noopener">https://blog.csdn.net/cheidou123/article/details/90712178</a></p>
+</blockquote>
+<h3 id="1-进程和线程"><a href="#1-进程和线程" class="headerlink" title="1. 进程和线程"></a>1. 进程和线程</h3><ul>
 <li><strong>进程</strong>：进程是程序的一次执行过程，是系统运行程序的基本单位，因此进程是动态的。系统运行一个程序即是一个进程从创建，运行到消亡的过程。在Java中，当启动main函数时其实就是启动了一个JVM的进程，而main函数所在的线程就是这个进程中的一个线程，也称主线程。</li>
 <li><strong>线程</strong>：线程与进程相似，但线程是一个比进程更小的执行单位。一个进程在其执行的过程中可以产生多个线程。与进程不同的是同类的多个线程共享进程的<strong>堆</strong>和<strong>方法区</strong>资源，但每个线程有自己的<strong>程序计数器</strong>、<strong>虚拟机栈</strong>和<strong>本地方法栈</strong>，所以系统在产生一个线程，或是在各个线程之间作切换工作时，负担要比进程小得多，也正因为如此，线程也被称为轻量级进程。</li>
 <li>区别：进程是系统进行资源分配的一个独立单位，线程是进程的一个实体，是CPU调度和分派的基本单位，它是比进程更小的能独立运行的基本单位，一个进程可以包括多个线程。</li>
@@ -211,6 +214,98 @@
 <p><strong>（3）Volatile</strong></p>
 <ul>
 <li><code>volatile</code>关键字只能保证可见性，不能保证原子性。</li>
+</ul>
+<h3 id="10-死锁"><a href="#10-死锁" class="headerlink" title="10. 死锁"></a>10. 死锁</h3><p><strong>（1）产生死锁必须具备以下四个条件</strong></p>
+<ul>
+<li><strong>互斥条件</strong>：该资源任意一个时刻只由一个线程占用；</li>
+<li><strong>请求与保持条件</strong>：一个线程因请求资源而阻塞时，对已经持有的资源保持不放；</li>
+<li><strong>不剥夺条件</strong>：线程已获得的资源在未使用完之前不能被其他线程强行剥夺，只有自己使用完毕才释放资源；</li>
+<li><strong>循环等待条件</strong>：若干线程之间形成一种头尾相接的循环等待资源关系。</li>
+</ul>
+<p><strong>（2）如何避免死锁的产生</strong><br>只需要破坏四个条件之一即可：</p>
+<ul>
+<li><strong>破坏互斥条件</strong>：无法达到，因为加锁的目的就是形成互斥。</li>
+<li><strong>破坏请求与保持条件</strong>：一次性申请所有的资源。</li>
+<li><strong>破坏不剥夺条件</strong>：占用资源的线程进一步申请其他资源时，若申请不到，则可以主动释放自己占用的资源。</li>
+<li><strong>破坏循环等待条件</strong>：靠按序申请资源预防。按某一顺序申请资源，释放资源时反序释放。</li>
+</ul>
+<h3 id="11-守护线程"><a href="#11-守护线程" class="headerlink" title="11. 守护线程"></a>11. 守护线程</h3><p>Java中的两种线程分别是<strong>用户线程</strong>与<strong>守护线程</strong>，守护线程是最低优先级（如垃圾回收线程）。</p>
+<h3 id="12-sychronized关键字"><a href="#12-sychronized关键字" class="headerlink" title="12. sychronized关键字"></a>12. <code>sychronized</code>关键字</h3><p><strong>（1）原理</strong></p>
+<ul>
+<li><strong>代码块同步</strong>：使用<code>monitorenter</code>和<code>monitorexit</code>指令实现，<code>monitorenter</code>是在编译后插入到同步代码块的开始位置，<code>monitorexit</code>插入到同步代码块的结束处和异常处。任何对象都有一个monitor与之关联，当一个monitor被持有后，它将处于锁定状态。根据虚拟机规范的要求，在执行<code>monitorenter</code>指令时，首先要去尝试获取对象的锁，如果这个对象没被锁定，或者当前线程已经拥有了那个对象的锁，把锁的计数器加1；相应地，在执行<code>monitorexit</code>指令时会将锁计数器减1，当计数器被减到0时，锁就释放了。如果获取对象锁失败了，那当前线程就要阻塞等待，直到对象锁被另一个线程释放为止。</li>
+<li><strong>方法同步</strong>：相对于普通方法，其常量池中多了<em>ACC_SYNCHRONIZED</em>标示符。JVM就是根据该标示符来实现方法的同步的，当方法调用时，调用指令将会检查方法的<em>ACC_SYNCHRONIZED</em>访问标志是否被设置，如果设置了，执行线程将先获取monitor，获取成功之后才能执行方法体，方法执行完后再释放monitor。在方法执行期间，其他任何线程都无法再获得同一个monitor对象。本质上和代码块同步没有区别，只是方法的同步是一种隐式的方式来实现，无需通过字节码来完成。</li>
+</ul>
+<p><strong>（2）注意事项</strong></p>
+<ul>
+<li><code>sychronized</code>获取的都是对象锁；</li>
+<li>A线程持有object对象的Lock锁，B线程可以调用object对象的非<code>synchronized</code>方法，但不可以调用object任何的<code>synchronized</code>方法；</li>
+<li><code>sychronized</code>是可重入锁；</li>
+<li>若出现异常，锁将会自动释放；</li>
+<li><code>static</code>方法加<code>synchronized</code>是属于类的，非<code>static</code>方法是属于对象的。</li>
+</ul>
+<h3 id="13-ReentrantLock"><a href="#13-ReentrantLock" class="headerlink" title="13. ReentrantLock"></a>13. ReentrantLock</h3><p><strong>（1）概述</strong><br><code>sychronized</code>局限性：</p>
+<ul>
+<li>当线程尝试获取锁时，如果获取不到会一直阻塞；</li>
+<li>如果获取锁的线程进入休眠或阻塞，除非当前线程异常，否则其他线程尝试获取锁必须一直等到。</li>
+</ul>
+<p><strong>（2）锁的基本概念</strong></p>
+<ul>
+<li><strong>可重入锁</strong>：如果当前线程已经获得了某个监视器对象所持有的锁，那么该线程在该方法中调用另外一个同步方法也同样持有该锁。也可以这样说：同一个线程可以多次获取同一把锁。<code>ReentrantLock</code>和<code>synchronized</code>都是可重入锁。</li>
+<li><strong>可中断锁</strong>：如果某一线程A正在执行锁中的代码，另一线程B正在等待获取该锁，可能由于等待时间过长，线程B不想等待了，想先处理其他事情，我们可以让它中断自己或者在别的线程中中断它，这种就是可中断锁。</li>
+<li><strong>公平锁</strong>：先到先得。</li>
+</ul>
+<p><strong>（3）ReentrantLock与sychronized关键字对比</strong></p>
+<ul>
+<li>都是可重入锁。</li>
+<li><code>sychronized</code>是关键字，<code>ReentrantLock</code>是类。</li>
+<li><code>sychronized</code>通过JVM字节码实现，<code>ReentrantLock</code>通过CAS实现。</li>
+<li><code>synchronized</code>的加锁和释放锁是自动的，<code>ReetrantLock</code>需要手动加锁和释放锁。</li>
+<li><code>synchronized</code>是不可中断的，<code>ReetrantLock</code>可中断的。</li>
+<li><code>ReenTrantLock</code>可以指定是公平锁还是非公平锁。而<code>synchronized</code>只能是非公平锁。</li>
+<li><code>ReetrantLock</code>的<code>tryLock</code>可以设置超时机制。</li>
+</ul>
+<h3 id="14-volatile关键字"><a href="#14-volatile关键字" class="headerlink" title="14. volatile关键字"></a>14. <code>volatile</code>关键字</h3><p><strong>（1）目的</strong><br>保证变量的内存可见性，防止局部重排列。</p>
+<p><strong>（2）原理</strong><br><code>volatile</code>关键字增加内存屏障（内存栅栏），可以提供以下功能：</p>
+<ul>
+<li>它确保指令重排序时不会把其后面的指令排到内存屏障之前的位置，也不会把前面的指令排到内存屏障的后面；即在执行到内存屏障这句指令时，在它前面的操作已经全部完成。</li>
+<li>它会强制将对缓存的修改操作立即写入主存。</li>
+<li>如果是写操作，它会导致其他CPU中对应的缓存行无效。</li>
+</ul>
+<p><strong>（3）与sychronized的区别</strong></p>
+<ul>
+<li><code>volatile</code>只能修饰变量，性能好。<code>synchronized</code>可以修饰代码块，方法。</li>
+<li><code>volatile</code>不会出现阻塞，<code>synchronized</code>会出现阻塞。</li>
+<li><code>volatile</code>保持数据可见性，不支持原子性，<code>synchronized</code>保证原子性，也间接保证可见性。</li>
+<li><code>volatile</code>解决的是变量在多个线程之间的可见性，而<code>synchronized</code>关键字解决的是多个线程访问资源的同步性。</li>
+</ul>
+<h3 id="15-线程池"><a href="#15-线程池" class="headerlink" title="15. 线程池"></a>15. 线程池</h3><p><strong>（1）目的</strong></p>
+<ul>
+<li>避免创建和销毁线程的系统开销；</li>
+<li>控制最大并发数，防止阻塞；</li>
+<li>对线程进行简单管理，如延迟执行。</li>
+</ul>
+<p><strong>（2）使用原理</strong></p>
+<ul>
+<li>线程数量未达到corePoolSize，则新建一个线程（核心线程）执行任务；</li>
+<li>线程数量达到了corePoolSize，则将任务移入队列等待；</li>
+<li>队列已满，新建线程（非核心线程）执行任务；</li>
+<li>队列已满，且总线程数已达到maximumPoolSize，则会采取拒绝策略。</li>
+</ul>
+<p><strong>（3）常见线程池</strong></p>
+<ul>
+<li>可缓存线程池<code>CachedThreadPool</code>：<ul>
+<li>线程数无限制；</li>
+<li>有空闲线程则复用空闲线程，无空闲线程则新建线程；</li>
+<li>闲置线程60s会自动销毁。</li>
+</ul>
+</li>
+<li>定长线程池<code>FixedThreadPool</code>：核心线程数=最大线程数，并且池内线程不会因为闲置超时而销毁，队列无限长，直到outOfMemory。</li>
+<li>定时线程池<code>ScheduledThreadPool</code>：<ul>
+<li>设置核心线程数，最大线程数为Integer.MAX_VALUE，其实也是无限长；</li>
+<li>支持延迟及周期性任务执行。</li>
+</ul>
+</li>
+<li>单线程化线程池<code>SingleThreadPool</code>：有且仅有一个工作线程执行任务，所有任务按序执行，遵循队列规则。</li>
 </ul>
 
         

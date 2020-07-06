@@ -93,7 +93,7 @@
     </div>
     
         <div id="toc" class="toc-article">
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、为什么要有包装类"><span class="toc-text">一、为什么要有包装类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、装箱？拆箱？"><span class="toc-text">二、装箱？拆箱？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、丰富的例子"><span class="toc-text">三、丰富的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、有必要提一下-操作符与Object类的equals-方法"><span class="toc-text">四、有必要提一下&#x3D;&#x3D;操作符与Object类的equals()方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、那就有必要顺带一提hashCode"><span class="toc-text">五、那就有必要顺带一提hashCode()</span></a></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、为什么要有包装类"><span class="toc-text">一、为什么要有包装类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、装箱？拆箱？"><span class="toc-text">二、装箱？拆箱？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、丰富的例子"><span class="toc-text">三、丰富的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、有必要提一下-操作符与Object类的equals-方法"><span class="toc-text">四、有必要提一下&#x3D;&#x3D;操作符与Object类的equals()方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、那就有必要顺带一提hashCode-方法"><span class="toc-text">五、那就有必要顺带一提hashCode()方法</span></a></li></ol>
 </div>
     
 </div>
@@ -144,7 +144,7 @@
     <div class="post-content ">
         <p>今天遇见一个有趣的例子：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="number">40</span>;</span><br><span class="line">Integer b = <span class="number">40</span>;</span><br><span class="line">Integer c = <span class="number">400</span>;</span><br><span class="line">Integer b = <span class="number">400</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(a == b); <span class="comment">// true</span></span><br><span class="line">System.out.println(c == b); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
-<p>这是为啥？原来是Java中存在一个名为<code>IntegerCache</code>的静态类，其中的静态代码块会创建一个包含-128<del>127的整型数组，若使用<code>Integer</code>创建的值范围在-128</del>127之间，就直接使用该<strong>常量池</strong>中的数据，否则就新建一个对象。基于此，重新复习了一遍Java中的基本数据类型包装类与自动装箱、自动拆箱的机制。</p>
+<p>这是为啥？原来是Java中存在一个名为<code>IntegerCache</code>的静态类，其中的静态代码块会创建一个包含-128~127的整型数组，若使用<code>Integer</code>创建的值范围在-128~127之间，就直接使用该<strong>常量池</strong>中的数据，否则就新建一个对象。基于此，重新复习了一遍Java中的基本数据类型包装类与自动装箱、自动拆箱的机制。</p>
 <h2 id="一、为什么要有包装类"><a href="#一、为什么要有包装类" class="headerlink" title="一、为什么要有包装类"></a>一、为什么要有包装类</h2><p>Java是面向对象语言，其宗旨是一切皆对象。可是，Java中包含着八大基本数据类型，它们不具有对象的特征。于是，便有了包装类，让基本数据类型具有对象的特性，同时拥有一系列自己的属性与操作方法。</p>
 <h2 id="二、装箱？拆箱？"><a href="#二、装箱？拆箱？" class="headerlink" title="二、装箱？拆箱？"></a>二、装箱？拆箱？</h2><p>看如下定义：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer a = <span class="keyword">new</span> Integer(<span class="number">50</span>); <span class="comment">// (1)</span></span><br><span class="line">Integer b = <span class="number">50</span>; <span class="comment">// (2)</span></span><br><span class="line"><span class="keyword">int</span> c = b; <span class="comment">// (3)</span></span><br></pre></td></tr></table></figure>
@@ -163,7 +163,7 @@
 <li><strong>==</strong>：判断两个对象的地址是否相等，即判断两个对象是否是同一个对象。若==两端是基本数据类型，则比较它们的值是否相等，若是引用类型，则比较它们的内存地址是否相等。</li>
 <li><strong>equals()方法</strong>：同样是判断两个对象的地址是否相等。但该方法可以被重写（覆盖），用于比较值是否相等（如<code>String</code>类中就重写了<code>equals()</code>方法，当两个字符串对象的内容是一样的，就返回<code>true</code>）。</li>
 </ul>
-<h2 id="五、那就有必要顺带一提hashCode"><a href="#五、那就有必要顺带一提hashCode" class="headerlink" title="五、那就有必要顺带一提hashCode()"></a>五、那就有必要顺带一提hashCode()</h2><p>为啥重写了<code>equals()</code>方法就必须重写<code>hashCode()</code>方法？</p>
+<h2 id="五、那就有必要顺带一提hashCode-方法"><a href="#五、那就有必要顺带一提hashCode-方法" class="headerlink" title="五、那就有必要顺带一提hashCode()方法"></a>五、那就有必要顺带一提hashCode()方法</h2><p>为啥重写了<code>equals()</code>方法就必须重写<code>hashCode()</code>方法？</p>
 <p>众所周知，<code>hashCode()</code>是用于生成散列码，用于作为散列表的插入与查找标记。当两个对象的<code>hashCode()</code>相同时，表明它们位于桶中的同一个位置，却不代表它们是同一个对象，因为桶中的该位置还会有一个链表用于解决哈希冲突。此时会再调用<code>equals()</code>方法判断是否真的是同一个对象，若不是，则会在链上继续查找（或插入），若是，则返回（或不插入新的）。故两个相同的对象具有相同的<code>hashCode</code>，也令<code>equals()</code>返回值为<code>true</code>；但具有相同<code>hashCode</code>的两个对象不一定是同一对象，也即<code>equals()</code>可能返回<code>false</code>。故重写了<code>euqals()</code>方法也需要重写<code>hashCode()</code>方法。</p>
 
         
